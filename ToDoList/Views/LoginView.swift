@@ -13,8 +13,7 @@ extension Color {
 }
 
 struct LoginView: View {
-    @State var email = ""
-    @State var password = ""
+    @State var viewModel = LoginViewViewModel()
     
     var body: some View {
         NavigationView {
@@ -24,23 +23,25 @@ struct LoginView: View {
                 
                 // Login
                 Form {
-                    TextField("Email Address", text: $email)
-                        .textFieldStyle(DefaultTextFieldStyle()).bold()
-                    SecureField("Password", text: $password)
-                        .textFieldStyle(DefaultTextFieldStyle()).bold()
-                    
-                    Button {
-                        
-                    } label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .foregroundColor(.coralPink)
-                            Text("Login")
-                                .foregroundColor(.white)
-                                .bold()
-                        }
+                    if !viewModel.errorMessage.isEmpty {
+                        Text(viewModel.errorMessage)
+                            .foregroundColor(.red)
                     }
-                    .padding()
+                    
+                    TextField("Email Address", text: $viewModel.email)
+                        .textFieldStyle(DefaultTextFieldStyle()).bold()
+                        .autocapitalization(.none)
+                        .autocorrectionDisabled()
+                    
+                    SecureField("Password", text: $viewModel.password)
+                        .textFieldStyle(DefaultTextFieldStyle()).bold()
+                        .autocapitalization(.none)
+                        .autocorrectionDisabled()
+                    
+                    TLButton(title: "Login", background: .coralPink) {
+                        // Attempt to log in
+                        viewModel.login()
+                    }
                 }
                 .padding(.bottom, 30)
                 

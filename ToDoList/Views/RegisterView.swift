@@ -8,10 +8,7 @@
 import SwiftUI
 
 struct RegisterView: View {
-    @State var name = ""
-    @State var email = ""
-    @State var password = ""
-//    @State var passwordVerification = ""
+    @State var viewModel = RegisterViewViewModel()
     
     var body: some View {
         NavigationView {
@@ -21,27 +18,22 @@ struct RegisterView: View {
                 
                 // Login
                 Form {
-                    TextField("Full name", text: $name)
+                    TextField("Full name", text: $viewModel.name)
                         .textFieldStyle(DefaultTextFieldStyle()).bold()
-                    TextField("Email Address", text: $email)
-                        .textFieldStyle(DefaultTextFieldStyle()).bold()
-                    SecureField("Password", text: $password)
-                        .textFieldStyle(DefaultTextFieldStyle()).bold()
-//                    SecureField("Verify your password", text: $passwordVerification)
-//                        .textFieldStyle(DefaultTextFieldStyle()).bold()
+                        .autocorrectionDisabled()
                     
-                    Button {
-                        
-                    } label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .foregroundColor(.cuteBlue)
-                            Text("Create Account")
-                                .foregroundColor(.white)
-                                .bold()
-                        }
+                    TextField("Email Address", text: $viewModel.email)
+                        .textFieldStyle(DefaultTextFieldStyle()).bold()
+                        .autocapitalization(.none)
+                        .autocorrectionDisabled()
+                    
+                    SecureField("Password", text: $viewModel.password)
+                        .textFieldStyle(DefaultTextFieldStyle()).bold()
+//                    SecureField("Verify your password", text: $viewModel.passwordVerification)
+//                        .textFieldStyle(DefaultTextFieldStyle()).bold()
+                    TLButton(title: "Create Account", background: .cuteBlue) {
+                        // Attempt to register an account
                     }
-                    .padding()
                 }
                 
                 // Create Account

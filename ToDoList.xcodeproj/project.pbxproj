@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F23DF0422A859E38000CC83B /* TLButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23DF0412A859E38000CC83B /* TLButton.swift */; };
 		F286084C2A84C61A0026EAA2 /* ToDoListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F286084B2A84C61A0026EAA2 /* ToDoListApp.swift */; };
 		F286084E2A84C61A0026EAA2 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F286084D2A84C61A0026EAA2 /* MainView.swift */; };
 		F28608502A84C61B0026EAA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F286084F2A84C61B0026EAA2 /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F23DF0412A859E38000CC83B /* TLButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLButton.swift; sourceTree = "<group>"; };
 		F28608482A84C61A0026EAA2 /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F286084B2A84C61A0026EAA2 /* ToDoListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListApp.swift; sourceTree = "<group>"; };
 		F286084D2A84C61A0026EAA2 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				F28608702A84EA140026EAA2 /* RegisterView.swift */,
 				F28608722A84EA460026EAA2 /* ItemView.swift */,
 				F28608862A84F34A0026EAA2 /* HeaderView.swift */,
+				F23DF0412A859E38000CC83B /* TLButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 				F28608792A84EAB30026EAA2 /* MainViewViewModel.swift in Sources */,
 				F286084E2A84C61A0026EAA2 /* MainView.swift in Sources */,
 				F28608692A84E9D50026EAA2 /* ProfileView.swift in Sources */,
+				F23DF0422A859E38000CC83B /* TLButton.swift in Sources */,
 				F286087B2A84EACB0026EAA2 /* ProfileViewViewModel.swift in Sources */,
 				F28608732A84EA460026EAA2 /* ItemView.swift in Sources */,
 				F28608712A84EA140026EAA2 /* RegisterView.swift in Sources */,
