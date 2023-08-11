@@ -10,6 +10,7 @@ import SwiftUI
 extension Color {
     static let coralPink = Color(red: 249/255, green: 157/255, blue: 140/255)
     static let cuteBlue = Color(red: 140/255, green: 157/255, blue: 249/255)
+    static let appColor = Color(red: 236/255, green: 96/255, blue: 80/255)
 }
 
 struct LoginView: View {

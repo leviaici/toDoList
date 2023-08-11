@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+class ItemsViewViewModel: ObservableObject {
+    @Published var showingNewItemViewModel = false
+    
+    init() {}
+}
