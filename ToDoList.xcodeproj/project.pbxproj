@@ -32,6 +32,7 @@
 		F28608832A84EAEE0026EAA2 /* RegisterViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28608822A84EAEE0026EAA2 /* RegisterViewViewModel.swift */; };
 		F28608852A84EAF30026EAA2 /* ItemViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28608842A84EAF30026EAA2 /* ItemViewViewModel.swift */; };
 		F28608872A84F34A0026EAA2 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28608862A84F34A0026EAA2 /* HeaderView.swift */; };
+		F2FD9B642A86615700C4D611 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FD9B632A86615700C4D611 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		F28608822A84EAEE0026EAA2 /* RegisterViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewViewModel.swift; sourceTree = "<group>"; };
 		F28608842A84EAF30026EAA2 /* ItemViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewViewModel.swift; sourceTree = "<group>"; };
 		F28608862A84F34A0026EAA2 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		F2FD9B632A86615700C4D611 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 				F286084B2A84C61A0026EAA2 /* ToDoListApp.swift */,
 				F286084F2A84C61B0026EAA2 /* Assets.xcassets */,
 				F28608622A84C9980026EAA2 /* GoogleService-Info.plist */,
+				F2FD9B632A86615700C4D611 /* Extensions.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				F286084C2A84C61A0026EAA2 /* ToDoListApp.swift in Sources */,
 				F28608852A84EAF30026EAA2 /* ItemViewViewModel.swift in Sources */,
 				F28608812A84EAE90026EAA2 /* LoginViewViewModel.swift in Sources */,
+				F2FD9B642A86615700C4D611 /* Extensions.swift in Sources */,
 				F286087D2A84EAD60026EAA2 /* ItemsViewViewModel.swift in Sources */,
 				F286086B2A84E9E50026EAA2 /* ItemsView.swift in Sources */,
 				F286086D2A84E9F60026EAA2 /* NewItemView.swift in Sources */,

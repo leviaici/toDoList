@@ -33,6 +33,7 @@ struct RegisterView: View {
 //                        .textFieldStyle(DefaultTextFieldStyle()).bold()
                     TLButton(title: "Create Account", background: .cuteBlue) {
                         // Attempt to register an account
+                        viewModel.register()
                     }
                 }
                 
