@@ -35,7 +35,7 @@ struct RegisterView: View {
                         // Attempt to register an account
                         viewModel.register()
                     }
-                }
+                }.ignoresSafeArea(.keyboard)
                 
                 // Create Account
                 VStack {
@@ -43,9 +43,14 @@ struct RegisterView: View {
                     NavigationLink("Login",
                                    destination: LoginView())
                     .foregroundColor(.cuteBlue)
-                }.padding(.bottom, 30)
+                }
+                .padding(.bottom, 30)
+                .ignoresSafeArea(.keyboard)
             }
-        }.navigationBarBackButtonHidden(true)
+            .ignoresSafeArea(.keyboard)
+        }
+        .navigationBarBackButtonHidden(true)
+        .ignoresSafeArea(.keyboard)
     }
 }
 

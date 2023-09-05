@@ -53,11 +53,16 @@ struct LoginView: View {
                                    destination: RegisterView())
                     .foregroundColor(.coralPink)
                         
-                }.padding(.bottom, 30)
+                }
+                .padding(.bottom, 30)
+                .ignoresSafeArea(.keyboard)
                 
                 Spacer()
             }
-        }.navigationBarBackButtonHidden(true)
+            .ignoresSafeArea(.keyboard)
+        }
+        .navigationBarBackButtonHidden(true)
+        .ignoresSafeArea(.keyboard)
     }
 }
 

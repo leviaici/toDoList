@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ItemView: View {
-    @StateObject var viewModel = ProfileViewViewModel()
+    @StateObject var viewModel = ItemViewViewModel()
     let item: Item
     
     var body: some View {
@@ -24,7 +24,7 @@ struct ItemView: View {
             Button {
                 viewModel.toggleIsDone(item: item)
             } label: {
-                Image(systemName: item.isDone ? "checkmark.circle.fill" : "circle")
+                Image(systemName: item.isDone ? "checkmark.circle.fill" : "circle").foregroundColor(.appColor)
             }
         }
     }
