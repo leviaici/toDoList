@@ -5,21 +5,35 @@
 //  Created by Adrian Leventiu on 10.08.2023.
 //
 
+import FirebaseFirestoreSwift
 import SwiftUI
 
 struct ItemsView: View {
-    @StateObject var viewModel = ItemsViewViewModel()
-    
-    private let userId: String
-    
+    @StateObject var viewModel: ItemsViewViewModel
+    @FirestoreQuery var items: [Item]
+        
     init(userId: String) {
-        self.userId = userId
+        self._items = FirestoreQuery(collectionPath: "users/\(userId)/todos")
+        self._viewModel = StateObject(
+            wrappedValue: ItemsViewViewModel(userId: userId)
+        )
     }
     
     var body: some View {
         NavigationView {
             VStack {
-                
+                List(items) { item in
+                    ItemView(item: item)
+                        .swipeActions {
+                            Button {
+                                viewModel.delete(id: item.id)
+                            } label: {
+                                Image(systemName: "trash.fill")
+                            }.tint(.red)
+                        }
+                }
+                .listStyle(PlainListStyle())
+                .padding(.top, 20)
             }
             .navigationTitle("My List")
             .toolbar {
@@ -39,6 +53,6 @@ struct ItemsView: View {
 
 struct ItemsView_Previews: PreviewProvider {
     static var previews: some View {
-        ItemsView(userId: "")
+        ItemsView(userId: "4GYnXVlMCMR8LQ0JErKq1OPRTeh2")
     }
 }

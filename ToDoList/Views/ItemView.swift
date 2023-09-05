@@ -8,13 +8,34 @@
 import SwiftUI
 
 struct ItemView: View {
+    @StateObject var viewModel = ProfileViewViewModel()
+    let item: Item
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            VStack(alignment: .leading) {
+                Text(item.title)
+                    .bold()
+                Text("Due: \(Date(timeIntervalSince1970: item.dueDate).formatted(date: .abbreviated, time: .shortened))")
+                    .font(.footnote)
+            }
+            Spacer()
+            
+            Button {
+                viewModel.toggleIsDone(item: item)
+            } label: {
+                Image(systemName: item.isDone ? "checkmark.circle.fill" : "circle")
+            }
+        }
     }
 }
 
 struct ItemView_Previews: PreviewProvider {
     static var previews: some View {
-        ItemView()
+        ItemView(item: .init(id: "123",
+                             title: "Start learning!",
+                             dueDate: Date().timeIntervalSince1970,
+                             createdDate: Date().timeIntervalSince1970,
+                             isDone: true))
     }
 }
