@@ -15,6 +15,7 @@ extension Color {
 
 struct LoginView: View {
     @State var viewModel = LoginViewViewModel()
+    @State private var isKeyboardVisible = false
     
     var body: some View {
         NavigationView {
@@ -45,17 +46,27 @@ struct LoginView: View {
                     }
                 }
                 .padding(.bottom, 30)
+                .padding(.top, isKeyboardVisible ? -150 : 0)
+                .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { notification in
+                            withAnimation {
+                                isKeyboardVisible = true
+                            }
+                        }
+                .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { notification in
+                    withAnimation {
+                        isKeyboardVisible = false
+                    }
+                }
                 
                 // Create Account
                 VStack {
                     Text("New here?")
                     NavigationLink("Create an Account",
                                    destination: RegisterView())
-                    .foregroundColor(.coralPink)
+                        .foregroundColor(.coralPink)
                         
                 }
                 .padding(.bottom, 30)
-                .ignoresSafeArea(.keyboard)
                 
                 Spacer()
             }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RegisterView: View {
     @State var viewModel = RegisterViewViewModel()
+    @State private var isKeyboardVisible = false
     
     var body: some View {
         NavigationView {
@@ -35,7 +36,19 @@ struct RegisterView: View {
                         // Attempt to register an account
                         viewModel.register()
                     }
-                }.ignoresSafeArea(.keyboard)
+                }
+                .ignoresSafeArea(.keyboard)
+                .padding(.top, isKeyboardVisible ? -175 : 0)
+                .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { notification in
+                            withAnimation {
+                                isKeyboardVisible = true
+                            }
+                        }
+                .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { notification in
+                    withAnimation {
+                        isKeyboardVisible = false
+                    }
+                }
                 
                 // Create Account
                 VStack {
