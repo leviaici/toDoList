@@ -10,6 +10,7 @@ import FirebaseAuth
 import Foundation
 
 class ItemViewViewModel: ObservableObject {
+    @Published var showingModifiedItemViewModel = false
     init() {}
     
     func toggleIsDone(item: Item) {

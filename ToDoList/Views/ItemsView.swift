@@ -24,13 +24,24 @@ struct ItemsView: View {
             VStack {
                 List(items) { item in
                     ItemView(item: item)
-                        .swipeActions {
+                        .swipeActions(edge: .trailing) {
                             Button {
                                 viewModel.delete(id: item.id)
                             } label: {
                                 Image(systemName: "trash.fill")
                             }.tint(.red)
                         }
+                        .swipeActions(edge: .leading) {
+                            Button {
+                                viewModel.showingModifiedItemViewModel = true
+                            } label: {
+                                Image(systemName: "slider.horizontal.3")
+                            }
+                            .tint(.appColor)
+                        }
+                        .sheet(isPresented: $viewModel.showingModifiedItemViewModel) {
+                                ModifyItemView(item: item, modifiedItemPresented:  $viewModel.showingModifiedItemViewModel)
+                            }
                 }
                 .listStyle(PlainListStyle())
                 .padding(.top, 20)

@@ -19,6 +19,7 @@ struct ItemView: View {
                 Text("Due: \(Date(timeIntervalSince1970: item.dueDate).formatted(date: .abbreviated, time: .shortened))")
                     .font(.footnote)
             }
+            
             Spacer()
             
             Button {

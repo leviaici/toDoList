@@ -10,6 +10,7 @@ import Foundation
 
 class ItemsViewViewModel: ObservableObject {
     @Published var showingNewItemViewModel = false
+    @Published var showingModifiedItemViewModel = false
     
     private let userId: String
     
