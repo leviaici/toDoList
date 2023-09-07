@@ -42,21 +42,24 @@ struct ModifyItemView: View {
             }
             .alert(isPresented: $viewModel.showAlert) {
                 Alert(title: Text("Error"),
-                      message: Text("Please be sure that you fill in all fields and select a due date that it's later than now."))
+                      message: Text("Please be sure that you leave no empty fields and select a due date that it's later than today."))
             }
         }
     }
 }
 
-//struct ModifyItemView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ModifyItemView(item: Item(
-//            id: UUID().uuidString,
-//            title: "title",
-//            dueDate: Date().timeIntervalSince1970,
-//            createdDate: Date().timeIntervalSince1970,
-//            isDone: false
-//            )
-//        )
-//    }
-//}
+struct ModifyItemView_Previews: PreviewProvider {
+    static var previews: some View {
+        ModifyItemView(item: Item(
+            id: UUID().uuidString,
+            title: "title",
+            dueDate: Date().timeIntervalSince1970,
+            createdDate: Date().timeIntervalSince1970,
+            isDone: false
+            ), modifiedItemPresented: Binding(get: {
+                return true
+            }, set: { _ in
+            })
+        )
+    }
+}
