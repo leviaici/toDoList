@@ -11,23 +11,24 @@ import SwiftUI
 struct ItemsView: View {
     @StateObject var viewModel: ItemsViewViewModel
     @FirestoreQuery var items: [Item]
-        
+    @State private var selectedItem: Item?
+    @State private var isModifyItemViewPresented = false
+
     init(userId: String) {
         self._items = FirestoreQuery(collectionPath: "users/\(userId)/todos")
         self._viewModel = StateObject(
             wrappedValue: ItemsViewViewModel(userId: userId)
         )
     }
-    
+
     var overdueItems: [Item] {
-        return items.filter { $0.dueDate < Date().timeIntervalSince1970
-            }
+        return items.filter { $0.dueDate < Date().timeIntervalSince1970 }
     }
 
     var upcomingItems: [Item] {
         return items.filter { $0.dueDate >= Date().timeIntervalSince1970 }
     }
-    
+
     var body: some View {
         NavigationView {
             VStack {
@@ -62,8 +63,18 @@ struct ItemsView: View {
                 NewItemView(newItemPresented: $viewModel.showingNewItemViewModel)
             }
         }
+        .sheet(isPresented: Binding(
+                        get: { isModifyItemViewPresented && selectedItem != nil },
+                        set: { newValue in
+                            isModifyItemViewPresented = newValue
+                        }
+        )) {
+            if let selectedItem = selectedItem {
+                ModifyItemView(item: selectedItem, modifiedItemPresented: $isModifyItemViewPresented)
+            }
+        }
     }
-    
+
     func showItems(item: Item) -> some View {
         ItemView(item: item)
             .swipeActions(edge: .trailing) {
@@ -75,17 +86,17 @@ struct ItemsView: View {
             }
             .swipeActions(edge: .leading) {
                 Button {
-                    viewModel.showingModifiedItemViewModel = true
+                    selectedItem = item
+                    isModifyItemViewPresented = true
                 } label: {
                     Image(systemName: "slider.horizontal.3")
                 }
                 .tint(.appColor)
             }
-            .sheet(isPresented: $viewModel.showingModifiedItemViewModel) {
-                    ModifyItemView(item: item, modifiedItemPresented:  $viewModel.showingModifiedItemViewModel)
-                }
     }
 }
+
+
 
 struct ItemsView_Previews: PreviewProvider {
     static var previews: some View {
