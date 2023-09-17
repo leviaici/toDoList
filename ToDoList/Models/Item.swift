@@ -13,8 +13,13 @@ struct Item: Codable, Identifiable {
     let dueDate: TimeInterval
     let createdDate: TimeInterval
     var isDone: Bool
+    var recentlyDeleted: Bool
     
     mutating func setDone(_ state: Bool) {
         isDone = state
+    }
+    
+    mutating func setRecentlyDeleted(_ state: Bool) {
+        recentlyDeleted = state
     }
 }

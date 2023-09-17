@@ -18,12 +18,12 @@ class ItemsViewViewModel: ObservableObject {
         self.userId = userId
     }
     
-    func delete(id: String) {
+    func sendToRecentlyDeleted(id: String) {
         let db = Firestore.firestore()
         db.collection("users")
             .document(userId)
             .collection("todos")
             .document(id)
-            .delete()
+            .setData(["recentlyDeleted": true], merge: true)
     }
 }

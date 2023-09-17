@@ -37,7 +37,7 @@ class ModifyItemViewViewModel: ObservableObject {
             .document(uId)
             .collection("todos")
             .document(item.id)
-            .setData(["title": self.title, "dueDate": self.dueDate.timeIntervalSince1970, "createdDate": Date().timeIntervalSince1970], merge: true) { error in
+            .setData(["title": self.title, "dueDate": self.dueDate.timeIntervalSince1970, "createdDate": Date().timeIntervalSince1970, "recentlyDeleted": false], merge: true) { error in
                 if let error = error {
                     print("Error updating document: \(error)")
                 } else {

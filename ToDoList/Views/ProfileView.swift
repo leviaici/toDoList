@@ -62,12 +62,6 @@ struct ProfileView: View {
             viewModel.fetch()
         }
     }
-    
-//    @ViewBuilder
-//    func showProfile(user: User) -> some View {
-//
-//
-//    }
 }
 
 struct ProfileView_Previews: PreviewProvider {

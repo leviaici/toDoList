@@ -13,20 +13,26 @@ struct ItemsView: View {
     @FirestoreQuery var items: [Item]
     @State private var selectedItem: Item?
     @State private var isModifyItemViewPresented = false
+    private var userId: String
 
     init(userId: String) {
         self._items = FirestoreQuery(collectionPath: "users/\(userId)/todos")
         self._viewModel = StateObject(
             wrappedValue: ItemsViewViewModel(userId: userId)
         )
+        self.userId = userId
+    }
+    
+    var shownItems: [Item] {
+        return items.filter { $0.recentlyDeleted == false }
     }
 
     var overdueItems: [Item] {
-        return items.filter { $0.dueDate < Date().timeIntervalSince1970 }
+        return shownItems.filter { $0.dueDate < Date().timeIntervalSince1970 }
     }
 
     var upcomingItems: [Item] {
-        return items.filter { $0.dueDate >= Date().timeIntervalSince1970 }
+        return shownItems.filter { $0.dueDate >= Date().timeIntervalSince1970 }
     }
 
     var body: some View {
@@ -51,6 +57,12 @@ struct ItemsView: View {
             }
             .listStyle(PlainListStyle())
             .navigationTitle("My List")
+            .toolbar {
+                NavigationLink(destination: RecentlyDeletedView(userId: userId)) {
+                    Image(systemName: "trash")
+                }
+                    .foregroundColor(.appColor)
+            }
             .toolbar {
                 Button {
                     // Action of the button
@@ -79,7 +91,7 @@ struct ItemsView: View {
         ItemView(item: item)
             .swipeActions(edge: .trailing) {
                 Button {
-                    viewModel.delete(id: item.id)
+                    viewModel.sendToRecentlyDeleted(id: item.id)
                 } label: {
                     Image(systemName: "trash.fill")
                 }.tint(.red)

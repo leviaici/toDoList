@@ -55,7 +55,8 @@ struct ModifyItemView_Previews: PreviewProvider {
             title: "title",
             dueDate: Date().timeIntervalSince1970,
             createdDate: Date().timeIntervalSince1970,
-            isDone: false
+            isDone: false,
+            recentlyDeleted: false
             ), modifiedItemPresented: Binding(get: {
                 return true
             }, set: { _ in

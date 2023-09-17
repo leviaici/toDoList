@@ -10,6 +10,7 @@ import SwiftUI
 struct ItemView: View {
     @StateObject var viewModel = ItemViewViewModel()
     let item: Item
+    var showCheck: Bool = true
     
     var body: some View {
         HStack {
@@ -21,11 +22,12 @@ struct ItemView: View {
             }
             
             Spacer()
-            
-            Button {
-                viewModel.toggleIsDone(item: item)
-            } label: {
-                Image(systemName: item.isDone ? "checkmark.circle.fill" : "circle").foregroundColor(.appColor)
+            if(showCheck) {
+                Button {
+                    viewModel.toggleIsDone(item: item)
+                } label: {
+                    Image(systemName: item.isDone ? "checkmark.circle.fill" : "circle").foregroundColor(.appColor)
+                }
             }
         }
     }
@@ -37,6 +39,6 @@ struct ItemView_Previews: PreviewProvider {
                              title: "Start learning!",
                              dueDate: Date().timeIntervalSince1970,
                              createdDate: Date().timeIntervalSince1970,
-                             isDone: true))
+                             isDone: true, recentlyDeleted: false))
     }
 }
