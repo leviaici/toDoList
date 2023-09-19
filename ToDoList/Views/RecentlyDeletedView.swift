@@ -7,10 +7,12 @@
 
 import FirebaseFirestoreSwift
 import SwiftUI
+import UIKit
 
 struct RecentlyDeletedView: View {
     @StateObject var viewModel: RecentlyDeletedViewViewModel
     @FirestoreQuery var items: [Item]
+    @Environment(\.presentationMode) var presentationMode
 
     init(userId: String) {
         self._items = FirestoreQuery(collectionPath: "users/\(userId)/todos")
@@ -40,11 +42,15 @@ struct RecentlyDeletedView: View {
         .navigationTitle("Recently Deleted")
         .listStyle(PlainListStyle())
         .toolbar {
-            Button {
-                viewModel.deleteAllItems()
-            } label: {
-                Text("Delete All")
-            }.foregroundColor(.appColor)
+            if !shownItems.isEmpty {
+                Button {
+                    showAlert(outputText: "Delete All Items",
+                              messageShown: "Are you sure you want to erase all these items?\nThis action cannot be reverted.",
+                              viewModel: viewModel)
+                } label: {
+                    Text("Delete All")
+                }.foregroundColor(.appColor)
+            }
         }
     }
 
@@ -53,7 +59,10 @@ struct RecentlyDeletedView: View {
         ItemView(item: item, showCheck: false)
             .swipeActions(edge: .trailing) {
                 Button {
-                    viewModel.delete(id: item.id)
+                    showAlert(outputText: "Delete Item",
+                              messageShown: "Are you sure you want to erase this item?\nThis action cannot be reverted.",
+                              viewModel: viewModel,
+                              id: item.id)
                 } label: {
                     Image(systemName: "trash.fill")
                 }.tint(.red)
@@ -66,6 +75,43 @@ struct RecentlyDeletedView: View {
                 }
                 .tint(.appColor)
             }
+    }
+    
+    func showAlert(outputText: String,
+                   messageShown: String,
+                   viewModel: RecentlyDeletedViewViewModel,
+                   id: String = "") {
+        
+        guard let viewController = UIApplication.shared.keyWindow?.rootViewController else {
+            return
+        }
+
+        let alert = UIAlertController(
+            title: outputText + "?",
+            message: messageShown,
+            preferredStyle: .actionSheet
+        )
+
+        alert.addAction(UIAlertAction(
+            title: outputText,
+            style: .destructive,
+            handler: { _ in
+                if(outputText == "Delete All Items") {
+                    viewModel.deleteAllItems()
+                    presentationMode.wrappedValue.dismiss()
+                } else {
+                    viewModel.delete(id: id)
+                }
+            }
+        ))
+
+        alert.addAction(UIAlertAction(
+            title: "Cancel",
+            style: .cancel,
+            handler: nil
+        ))
+
+        viewController.present(alert, animated: true, completion: nil)
     }
 }
 
