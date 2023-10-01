@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 extension Color {
     static let coralPink = Color(red: 249/255, green: 157/255, blue: 140/255)
@@ -16,6 +17,7 @@ extension Color {
 struct LoginView: View {
     @State var viewModel = LoginViewViewModel()
     @State private var isKeyboardVisible = false
+    @State private var showAlert = false
     
     var body: some View {
         NavigationView {
@@ -64,9 +66,23 @@ struct LoginView: View {
                     NavigationLink("Create an Account",
                                    destination: RegisterView())
                         .foregroundColor(.coralPink)
-                        
+                    
+                    NavigationLink(destination: LoginView()) {
+                        Text("Forgot your password?")
+                            .onTapGesture {
+                                popAlert()
+                            }
+//                            .alert(isPresented: $viewModel.showAlert) {
+//                                Alert(
+//                                    title: Text("Error"),
+//                                    message: Text(viewModel.errorMessage),
+//                                    dismissButton: .default(Text("OK"))
+//                                )
+//                            }
+                            .foregroundColor(.coralPink)
+                    }
                 }
-                .padding(.bottom, 30)
+                .padding(.bottom, 10)
                 
                 Spacer()
             }
@@ -74,6 +90,42 @@ struct LoginView: View {
         }
         .navigationBarBackButtonHidden(true)
         .ignoresSafeArea(.keyboard)
+    }
+    
+    func popAlert() {
+        guard let viewController = UIApplication.shared.keyWindow?.rootViewController else {
+                return
+        }
+        
+        let alert = UIAlertController(
+            title: "E-mail",
+            message: "Please, provide us the e-mail used for the account.",
+            preferredStyle: .alert
+        )
+
+        alert.addTextField(
+            configurationHandler: { textField in
+                textField.placeholder = "your_e-mail@example.pls"
+            })
+        
+        alert.addAction(UIAlertAction(
+            title: "Send",
+            style: .default,
+            handler: { _ in
+                if let emailTextField = alert.textFields?.first, let email = emailTextField.text {
+                        // Pass the email to viewModel.reset()
+                        viewModel.reset(email: email)
+                    }
+            }
+        ))
+
+        alert.addAction(UIAlertAction(
+            title: "Cancel",
+            style: .cancel,
+            handler: nil
+        ))
+
+        viewController.present(alert, animated: true, completion: nil)
     }
 }
 

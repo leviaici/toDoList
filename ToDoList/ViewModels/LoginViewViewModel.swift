@@ -7,11 +7,13 @@
 
 import FirebaseAuth
 import Foundation
+import SwiftUI
 
 class LoginViewViewModel: ObservableObject {
     @Published var email = ""
     @Published var password = ""
     @Published var errorMessage = ""
+    @Published var showAlert = false
     
     init() {}
     
@@ -38,4 +40,19 @@ class LoginViewViewModel: ObservableObject {
         
         return true
     }
+    
+    func reset(email: String) {
+        let auth = Auth.auth()
+        
+        auth.sendPasswordReset(withEmail: email) { (error) in
+//            if let error = error {
+//                self.errorMessage = "This e-mail does not exist in our database. Please, check once again if you filled correctly the e-mail field."
+//                self.showAlert = true
+//            } else {
+//                self.errorMessage = "An e-mail has been successfully sent to your address regarding the password reset!"
+//                self.showAlert = true
+//            }
+        }
+    }
+
 }
