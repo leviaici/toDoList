@@ -112,6 +112,6 @@ struct ItemsView: View {
 
 struct ItemsView_Previews: PreviewProvider {
     static var previews: some View {
-        ItemsView(userId: "4GYnXVlMCMR8LQ0JErKq1OPRTeh2")
+        ItemsView(userId: "Your key here")
     }
 }
