@@ -17,13 +17,19 @@ class LoginViewViewModel: ObservableObject {
     
     init() {}
     
-    func login() {
+    func login() -> Bool {
         guard validate() else {
-            return
+            return false
         }
         
         // Attempt to log in
-        Auth.auth().signIn(withEmail: email, password: password)
+        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
+            if let error = error {
+                self.errorMessage = "Login failed: \(error.localizedDescription)"
+                self.showAlert = true
+            }
+        }
+        return true
     }
     
     private func validate() -> Bool {

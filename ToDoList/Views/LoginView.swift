@@ -44,7 +44,9 @@ struct LoginView: View {
                     
                     TLButton(title: "Login", background: .coralPink) {
                         // Attempt to log in
-                        viewModel.login()
+                        if(!viewModel.login()) {
+                            popFail()
+                        }
                     }
                 }
                 .padding(.bottom, 30)
@@ -92,6 +94,21 @@ struct LoginView: View {
         .ignoresSafeArea(.keyboard)
     }
     
+    func popFail() {
+        guard let viewController = UIApplication.shared.keyWindow?.rootViewController else {
+            return
+        }
+        let alert = UIAlertController(
+            title: "Login Failed",
+            message: "Looks like you might be missing some information. Please review all fields and make sure your email and password are correct.",
+            preferredStyle: .alert
+        )
+      let okayAction = UIAlertAction(title: "Close", style: .default, handler: nil)
+      alert.addAction(okayAction)
+      viewController.present(alert, animated: true, completion: nil)
+    }
+
+    
     func popAlert() {
         guard let viewController = UIApplication.shared.keyWindow?.rootViewController else {
                 return
@@ -113,7 +130,6 @@ struct LoginView: View {
             style: .default,
             handler: { _ in
                 if let emailTextField = alert.textFields?.first, let email = emailTextField.text {
-                        // Pass the email to viewModel.reset()
                         viewModel.reset(email: email)
                     }
             }
