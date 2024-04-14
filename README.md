@@ -42,6 +42,7 @@ This To Do List app goes beyond the basics, offering a comprehensive set of feat
 <summary><h4><b>Friendly UI</b></h4></summary>
   <li>Clean and friendly user interface for a smooth and enjoyable experience.</li>
   <li>Intuitively send tasks into "Recently Deleted" menu with a simple swipe action.</li>
+  <li>Intuitively edit tasks with a simple swipe action.</li>
   <li>Intuitively permanently delete or recover tasks from "Recently Deleted" menu with a simple swipe action.</li>
 </details>
 
