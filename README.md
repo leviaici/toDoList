@@ -72,6 +72,7 @@ Let's have a glance at how to use the app:
 <summary><h4><b>Managing the tasks</b></h4></summary>
   <li>Add new tasks by tapping the "+" button and filling in the details.</li>
   <li>Swipe left on a task to delete it.</li>
+  <li>Swipe right on a task to enter in edit mode.</li>
   <li>Mark tasks as completed by tapping the checkbox.</li>
   <li>Access the recently deleted menu to restore or permanently delete tasks. You can either swipe left to permanently delete the task or swipe right to restore it. You can also delete them all by pressing the "Delete All" button.</li>
 </details>
